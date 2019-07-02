@@ -42,8 +42,8 @@ public:
 
 	//Combat
 
-	int AttaquePhysique(Personnage& cible);
-	int AttaqueMagique(Personnage& cible);
+	void AttaquePhysique(Personnage& cible);
+	void AttaqueMagique(Personnage& cible);
 	float Coefficient();
 
 

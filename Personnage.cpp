@@ -2,6 +2,8 @@
 #include <iostream>
 #include <math.h>
 #include <string>
+#include <stdlib.h>
+#include <time.h> 
 
 Personnage::Personnage(int Pdv, int Fo, int intel, int Def, int Man, int Pdm, int Poi, int Dex, int Sag, int Cha, int Ini, std::string NamePerso, int Resi) {
 
@@ -125,29 +127,39 @@ void Personnage::SetResistance(int Resi) {
 	Resistance = Resi;
 }
 
-int Personnage::AttaquePhysique(Personnage& cible) {
+void Personnage::AttaquePhysique(Personnage& cible) {
 	float degats = 0;
 	float defenses = 0;
-	degats = Force * (Coefficient() + 1);
-	defenses = (cible.GetDefense()) * (cible.Coefficient() + 1);
-	cible.SetPointDeVie(cible.GetPointDeVie - (degats - defenses));
+	degats = float(Force) * (Coefficient() + 1.f);
+	defenses = (float(cible.GetDefense())) * (cible.Coefficient() + 1.f);
+	cible.SetPointDeVie(int(cible.GetPointDeVie() - (degats - defenses)));
 }
 
-int Personnage::AttaqueMagique(Personnage& cible) {
-	return(2);
+void Personnage::AttaqueMagique(Personnage& cible) {
+	
 }
 
 float Personnage::Coefficient() {
-	int random = 0;
+	float random = 0;
 	random = rand() % 101;
-	if (random <= 10 - (Chance/90)) {
-		return((1 / (10 - (Chance / 90))) * random - 1);
+	float x = 0;
+	std::cout << "rand" << random << std::endl;
+
+	if (random <= (10 - (Chance/10.f))) {
+		x = float((1 / (10 - (Chance / 10.f))) * random);
+		std::cout << "rand1 " << x << std::endl;
+		return(float((1 / (10 - (Chance / 10.f))) * random - 1));
 	}
-	if ((10 - (Chance / 90)) < random < (90 - (Chance / 90))) {
-		return(1);
+
+	if ((10 - (Chance / 10.f)) < random && random < (90 - (Chance / 10.f))) {
+		x = 1;
+		std::cout << "rand2 " << x << std::endl;
+		return(0);
 	}
-	if (random >= 90 - (Chance / 90)) {
-		return((3 / (10 + (Chance / 90))) * random - (12 + ((-14 / 9) * (Chance / 90) + 14)));
+
+	if (random >= (90 - (Chance / 10.f))) {
+		x = float((3 / (10 + (Chance / 10.f))) * random - (12 + ((-14 / 9) * (Chance / 10.f) + 14)));
+		std::cout << "rand3 " << x << std::endl;
+		return(float((3 / (10 + (Chance / 10.f))) * random - (12 + ((-14 / 9) * (Chance / 10.f) + 14))));
 	}
-	
 }
