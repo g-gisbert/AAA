@@ -1,2 +1,2 @@
 # AAA
-A very ambitious video game
+Simple tactical RPG
